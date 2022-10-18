@@ -10,5 +10,10 @@
   },
   "devDependencies": {
     "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "dat.gui": "^0.7.9",
+    "three": "^0.145.0"
   }
 }

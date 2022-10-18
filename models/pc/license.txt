@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pc Gaming Ryzen Nvidia 1660
+* source:	https://sketchfab.com/3d-models/pc-gaming-ryzen-nvidia-1660-a8477b1bcafa46ffb66af25e287fd098
+* author:	paxillop (https://sketchfab.com/paxillop)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pc Gaming Ryzen Nvidia 1660" (https://sketchfab.com/3d-models/pc-gaming-ryzen-nvidia-1660-a8477b1bcafa46ffb66af25e287fd098) by paxillop (https://sketchfab.com/paxillop) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
