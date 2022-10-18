@@ -1,12 +1,18 @@
-// RayCaster for detecting when user clicks the PC to view details
+// Ini belom dipake
 
-import { Raycaster, Vector2 } from "three";
+const updateCoordinates = mousePosition => {
+    window.addEventListener('mousemove', e => {
+        mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1
+        mousePosition.y = (e.clientY / window.innerHeight) * 2 + 1
+    })  
+}
 
-const mousePosition = new Vector2()
+const gltfClickAction = (rayCaster, intersects, target, callbackFn) => {
+    // what to do when gltf object clicked
+}
 
-window.addEventListener('mousemove', e => {
-    mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1
-    mousePosition.y = (e.clientY / window.innerHeight) * 2 + 1
-})
+const meshClickAction = (rayCaster, intersects, target, callbackFn) => {
+    // what to do when normal mesh clicked
+}
 
-const rayCaster = new Raycaster()
+export { updateCoordinates, gltfClickAction, meshClickAction }
