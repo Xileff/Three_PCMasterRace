@@ -7,7 +7,7 @@ import { Raycaster, Vector2 } from "three";
 import PC from "./objects/pc.js";
 
 // Utils
-import { createRenderer, makeResponsive } from "./utils/renderer";
+import { createRenderer, makeResponsiveWindow } from "./utils/renderer";
 import { createScene } from "./utils/scene";
 import { createPerspectiveCamera } from "./utils/perspectiveCamera";
 import { createOrbit } from "./utils/orbitControl";
@@ -165,7 +165,7 @@ function start() {
 
   animate();
   // datGUI();
-  makeResponsive(window, renderer, camera);
+  makeResponsiveWindow(window, renderer, camera);
 }
 
 function animate() {
