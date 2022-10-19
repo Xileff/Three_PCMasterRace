@@ -1,0 +1,10 @@
+.header {
+  font-family: "Silkscreen", cursive;
+  font-size: 4em;
+}
+button {
+  font-weight: bolder !important;
+  font-size: 2rem !important;
+  font-family: "Silkscreen", cursive !important;
+  margin-bottom: 50px !important;
+}
