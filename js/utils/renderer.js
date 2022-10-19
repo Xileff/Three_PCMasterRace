@@ -13,12 +13,50 @@ const createRenderer = (width, height, color) => {
     return renderer;
 }
 
-const makeResponsive = (window, renderer, camera) => {
-    window.addEventListener('resize', function () {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+const makeResponsive = (container, renderer, camera) => {
+    let height, width
+
+    const resizeObserver = new ResizeObserver(() => {
+        console.log(container.domElement)
     })
+
+    resizeObserver.observe(container.domElement)
+    // if(container instanceof Window){
+    //     container.addEventListener('resize', function() {
+    //         width = container.innerWidth
+    //         height = container.innerHeight
+    //     })
+    // }
+
+    // else {
+    //     let resizeObserver =  new ResizeObserver(() => {
+    //         width = container.clientWidth
+    //         height = container.clientHeight
+    //     })
+
+    //     resizeObserver.observe(container)
+    // }
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+
+    // container.addEventListener('resize', function () {
+    //     let height, width
+    //     if(this instanceof Window){
+    //         height = this.innerHeight  
+    //         width = this.innerWidth
+    //         console.log('Window')
+    //     } else {
+    //         height = this.clientHeight
+    //         width = this.clientWidth
+    //         console.log('Not Window')
+    //     }
+
+    //     camera.aspect = width / height;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize(width, height);
+    // })
 }
 
 export { createRenderer, makeResponsive };
