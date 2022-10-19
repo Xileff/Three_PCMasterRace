@@ -8,15 +8,13 @@ import Cube from './objects/Cube'
 // Utils
 import { createOrbit } from './utils/orbitControl'
 import { createPerspectiveCamera } from './utils/perspectiveCamera'
-import { createRenderer, makeResponsiveNonWindow } from './utils/renderer'
+import { createRenderer, makeResponsiveNonWindow, makeResponsiveWindow } from './utils/renderer'
 import { createScene } from './utils/scene'
 
 // Preparation
-const canvasContainer = document.getElementById('canvasContainer')
-
-const renderer = createRenderer(canvasContainer.clientWidth, canvasContainer.clientHeight, 0x000000)
+const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000)
 const scene = createScene()
-const camera = createPerspectiveCamera(120, canvasContainer.clientWidth /  canvasContainer.clientHeight, 0.1, 1000)
+const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000)
 const orbit = createOrbit(camera, renderer.domElement)
 
 
@@ -37,12 +35,11 @@ start()
 // Functions
 function start() {
     camera.position.z = 3
-    renderer.domElement.classList.add('w-100', 'h-100')
-    canvasContainer.appendChild(renderer.domElement)
+    document.body.appendChild(renderer.domElement)
     
     renderer.render(scene, camera)
     animate()
-    makeResponsiveNonWindow(renderer, camera)
+    makeResponsiveWindow(window, renderer, camera)
 }
 
 function animate(){
