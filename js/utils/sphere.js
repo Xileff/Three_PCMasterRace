@@ -1,4 +1,4 @@
-import { DoubleSide, LineSegments, Mesh, MeshBasicMaterial, MeshLambertMaterial, SphereGeometry, WireframeGeometry } from "three"
+import { DoubleSide, LineSegments, Mesh, MeshBasicMaterial, MeshLambertMaterial, PointsMaterial, SphereGeometry, WireframeGeometry } from "three"
 
 const createSphere = (radius, widthSegments, heightSegments, color) => {
     return new Mesh(
