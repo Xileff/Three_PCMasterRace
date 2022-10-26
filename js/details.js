@@ -56,3 +56,5 @@ function animate() {
 
   renderer.render(scene, camera);
 }
+
+// Script andu, buat ubah2 teks di halaman details
