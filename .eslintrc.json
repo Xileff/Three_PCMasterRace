@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "airbnb-base",
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-unused-vars":"off",
+        "no-use-before-define":"off",
+        "prefer-default-export":"off",
+        "no-param-reassign":"off",
+        "eqeqeq":"off",
+        "linebreak-style":"off",
+        "no-plusplus":"off",
+        "one-var-declaration-per-line":"off",
+        "one-var":"off"
+    }
+}

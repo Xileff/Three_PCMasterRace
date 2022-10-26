@@ -1,37 +1,39 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-param-reassign */
 // Libraries
-import "bootstrap/dist/css/bootstrap.css";
-import * as dat from "dat.gui";
-import { Raycaster, Vector2 } from "three";
+import 'bootstrap/dist/css/bootstrap.css';
+import * as dat from 'dat.gui';
+import { Raycaster, Vector2 } from 'three';
 
 // 3D Models
-import PC from "./objects/pc.js";
+import PC from './objects/PC';
 
 // Utils
-import { createRenderer, makeResponsiveWindow } from "./utils/renderer";
-import { createScene } from "./utils/scene";
-import { createPerspectiveCamera } from "./utils/perspectiveCamera";
-import { createOrbit } from "./utils/orbitControl";
+import { createRenderer, makeResponsiveWindow } from './utils/renderer';
+import { createScene } from './utils/scene';
+import { createPerspectiveCamera } from './utils/perspectiveCamera';
+import { createOrbit } from './utils/orbitControl';
 import {
   createSpotlight,
   createSpotlightHelper,
   updateSpotlight,
-} from "./utils/spotlight";
-import { createAmbientLight } from "./utils/ambientLight";
-import { createDirectionalLight } from "./utils/directionalLight";
-import { createPointLight, createPointLightHelper } from "./utils/pointLight";
+} from './utils/spotlight';
+import { createAmbientLight } from './utils/ambientLight';
+import { createDirectionalLight } from './utils/directionalLight';
+import { createPointLight, createPointLightHelper } from './utils/pointLight';
 import {
   createHemisphereLight,
   createHemisphereLightHelper,
-} from "./utils/hemisphereLight";
-import { createPlane } from "./utils/plane";
-import { rotateX, rotateY, rotateZ } from "./utils/rotation";
-import { updateCoordinates } from "./utils/rayCaster.js";
+} from './utils/hemisphereLight';
+import { createPlane } from './utils/plane';
+import { rotateX, rotateY, rotateZ } from './utils/rotation';
+import { updateCoordinates } from './utils/rayCaster';
 import {
   createSphere,
   creatSphereWireframe,
   rotateFreely,
   rotateFreelyReverse,
-} from "./utils/sphere.js";
+} from './utils/sphere';
 
 // Debugging
 const options = {
@@ -44,14 +46,14 @@ const options = {
 const renderer = createRenderer(
   window.innerWidth,
   window.innerHeight,
-  0x000000
+  0x000000,
 );
 const scene = createScene();
 const camera = createPerspectiveCamera(
   120,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  1000,
 );
 const orbit = createOrbit(camera, renderer.domElement);
 
@@ -134,7 +136,8 @@ const mousePosition = new Vector2();
 watchMousePosition(mousePosition);
 const rayCaster = new Raycaster();
 
-// Masukin semua objects ke scene, kecuali yg GLTF(3d model dari luar) karena dilakuin dengan cara yang beda(di class)
+// Masukin semua objects ke scene,
+// kecuali yg GLTF(3d model dari luar) karena dilakuin dengan cara yang beda(di class)
 const objects = [
   // desk,
   sphere,
@@ -198,14 +201,14 @@ function animate() {
 function datGUI() {
   const gui = new dat.GUI();
 
-  gui.add(options, "angle", 0, 1);
-  gui.add(options, "penumbra", 0, 1);
-  gui.add(options, "intensity", 0, 1);
+  gui.add(options, 'angle', 0, 1);
+  gui.add(options, 'penumbra', 0, 1);
+  gui.add(options, 'intensity', 0, 1);
 }
 
-function watchMousePosition(mousePosition) {
-  window.addEventListener("mousemove", function (e) {
-    mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
+function watchMousePosition(mousePos) {
+  window.addEventListener('mousemove', (e) => {
+    mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mousePos.y = -(e.clientY / window.innerHeight) * 2 + 1;
   });
 }

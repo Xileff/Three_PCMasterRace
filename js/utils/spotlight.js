@@ -1,24 +1,24 @@
-import { SpotLight, SpotLightHelper } from "three";
+import { SpotLight, SpotLightHelper } from 'three';
 
 const createSpotlight = (color, intensity, position, angle, penumbra) => {
-    const spotLight = new SpotLight({
-        color: color,
-        angle: angle,
-        intensity: intensity,
-        penumbra: penumbra
-    })
-    spotLight.position.set(position.x, position.y, position.z);
-    spotLight.castShadow = true;
+  const spotLight = new SpotLight({
+    color,
+    angle,
+    intensity,
+    penumbra,
+  });
+  spotLight.position.set(position.x, position.y, position.z);
+  spotLight.castShadow = true;
 
-    return spotLight;
-}
+  return spotLight;
+};
 
-const createSpotlightHelper = spotlight => new SpotLightHelper(spotlight);
+const createSpotlightHelper = (spotlight) => new SpotLightHelper(spotlight);
 
 const updateSpotlight = (spotlight, angle, penumbra, intensity) => {
-    spotlight.angle = angle;
-    spotlight.penumbra = penumbra;
-    spotlight.intensity = intensity;
-}
+  spotlight.angle = angle;
+  spotlight.penumbra = penumbra;
+  spotlight.intensity = intensity;
+};
 
-export { createSpotlight, createSpotlightHelper, updateSpotlight }
+export { createSpotlight, createSpotlightHelper, updateSpotlight };

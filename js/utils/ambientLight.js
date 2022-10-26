@@ -1,9 +1,10 @@
-import { AmbientLight } from "three";
+/* eslint-disable import/prefer-default-export */
+import { AmbientLight } from 'three';
 
-const createAmbientLight = color => {
-    const ambientLight = new AmbientLight(color)
+const createAmbientLight = (color) => {
+  const ambientLight = new AmbientLight(color);
 
-    return ambientLight;
-}
+  return ambientLight;
+};
 
-export { createAmbientLight }
+export { createAmbientLight };
