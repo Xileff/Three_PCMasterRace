@@ -1,27 +1,40 @@
 // Libraries
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap';
-import { Clock } from 'three';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap";
+import { Clock } from "three";
 
 // Objects
-import Cube from './objects/Cube';
-import GPU from './objects/GPU';
-import { createDirectionalLight } from './utils/directionalLight';
-import { createHemisphereLight } from './utils/hemisphereLight';
+import Cube from "./objects/Cube";
+import GPU from "./objects/GPU";
+import { createDirectionalLight } from "./utils/directionalLight";
+import { createHemisphereLight } from "./utils/hemisphereLight";
 
 // Utils
-import { createOrbit } from './utils/orbitControl';
-import { animateParticle, createParticles } from './utils/particles';
-import { createPerspectiveCamera } from './utils/perspectiveCamera';
-import { createPointLight } from './utils/pointLight';
-import { createRenderer, makeResponsiveNonWindow, makeResponsiveWindow } from './utils/renderer';
-import { createScene } from './utils/scene';
-import { createSpotlight } from './utils/spotlight';
+import { createOrbit } from "./utils/orbitControl";
+import { animateParticle, createParticles } from "./utils/particles";
+import { createPerspectiveCamera } from "./utils/perspectiveCamera";
+import { createPointLight } from "./utils/pointLight";
+import {
+  createRenderer,
+  makeResponsiveNonWindow,
+  makeResponsiveWindow,
+} from "./utils/renderer";
+import { createScene } from "./utils/scene";
+import { createSpotlight } from "./utils/spotlight";
 
 // Preparation
-const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
+const renderer = createRenderer(
+  window.innerWidth,
+  window.innerHeight,
+  0x000000
+);
 const scene = createScene();
-const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = createPerspectiveCamera(
+  120,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 const orbit = createOrbit(camera, renderer.domElement);
 
 // Main part
@@ -105,8 +118,15 @@ const particlesMesh = createParticles(50000, 0.0005);
 // Put all objects in array and then start the animation
 const objects = [
   // cube.mesh,
-  directionalLight, directionalLight1, directionalLight2, directionalLight3,
-  hemisphereLight, hemisphereLightx1, hemisphereLightx2, hemisphereLighty1, hemisphereLighty2,
+  directionalLight,
+  directionalLight1,
+  directionalLight2,
+  directionalLight3,
+  hemisphereLight,
+  hemisphereLightx1,
+  hemisphereLightx2,
+  hemisphereLighty1,
+  hemisphereLighty2,
   pointLight,
   spotlight,
   spotlight1,
@@ -141,4 +161,23 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Script andu, buat ubah2 teks di halaman details
+// Script andu, buat ubah2 teks di halaman det
+
+$(".list-group-item").on("click", function () {
+  $(".list-group-item").removeClass("active");
+  $(this).addClass("active");
+  let daftarKomponen = $(this).html();
+  $("h5").html(daftarKomponen);
+
+  $.getJSON("../JSON/komponen.json", function (data) {
+    let komponen = data.komponen;
+    let detail = '';
+    console.log(komponen);
+    $.each(komponen, function(i, data){
+    if (data.nama.toUpperCase() == daftarKomponen.toUpperCase()) {
+      detail += '<p>' + data.deskripsi + '</p>';
+    } 
+  });
+  $("#deskripsi").html(detail);
+  });
+});

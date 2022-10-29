@@ -4,70 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Three</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
   </head>
   <body>
-      <div class="col-sm-3 h-100 position-absolute start-0 d-flex align-items-center px-5">
-        <!-- Component List -->
-        <ul class="list-group w-100">
-            <li class="list-group-item active" aria-current="true">An active item</li>
-            <li class="list-group-item">CPU</li>
-            <li class="list-group-item">GPU</li>
-            <li class="list-group-item">Motherboard</li>
-            <li class="list-group-item">RAM</li>
-            <li class="list-group-item dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Mass Storage
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">M.2 NVME SSD</a></li>
-                <li><a class="dropdown-item" href="#">SATA 2.5" SSD</a></li>
-                <li><a class="dropdown-item" href="#">HDD</a></li>
-              </ul>
-            </li>
-            <li class="list-group-item">PSU</li>
-            <li class="list-group-item">Motherboard</li>
+    <div
+      class="col-sm-3 h-100 position-absolute start-0 d-flex align-items-center px-5"
+    >
+      <!-- Component List -->
+      <ul class="list-group w-100">
+            <li class="list-group-item list-group-item-dark active list-group-item-action">Daftar Komponen</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">CPU</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">GPU</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">Motherboard</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">RAM</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">M.2</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">SSD</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">HDD</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">PSU</li>
+            <li class="list-group-item list-group-item-dark list-group-item-action">Motherboard</li>
           </ul>
-      </div>
-      <!-- Heading -->
-      <h1 class="w-100 text-center text-light position-absolute text-center py-5">Component name</h1>
-  
-      <!-- Component Details -->
-      <div class="col-sm-3 h-100 position-absolute end-0 d-flex align-items-center px-5 py-5">
-        <div class="w-100 h-100 bg-light overflow-scroll p-5">
-          <h3 class="text-center">Details</h3>
-          <h5>GPU</h5>
-          <p>What does GPU stand for? Graphics processing unit, a specialized processor originally designed to accelerate graphics rendering. GPUs can process many pieces of data simultaneously, making them useful for machine learning, video editing, and gaming applications.</p>
+      <!-- <div class="list-group w-100" id="myKomponen" role="tablist">
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark active"
+          data-bs-toggle="list"
+          href="#home"
+          id="CPU"
+          role="tab"
+          >CPU</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#profile"
+          id="GPU"
+          role="tab"
+          >GPU</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#messages"
+          role="tab"
+          >Motherboard</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#settings"
+          role="tab"
+          >RAM</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#settings"
+          role="tab"
+          >M.2</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#settings"
+          role="tab"
+          >SSD</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#settings"
+          role="tab"
+          >HDD</a
+        >
+        <a
+          class="list-group-item list-group-item-action list-group-item-dark"
+          data-bs-toggle="list"
+          href="#settings"
+          role="tab"
+          >PSU</a
+        >
+      </div> -->
+    </div>
+    <!-- Heading -->
+    <h1 class="w-100 text-center text-light position-absolute text-center py-5">
+      Component name
+    </h1>
 
-          <h5>In Display : Nvidia GeForce RTX 3060TI 8GB GDDR6</h5>
-          <p>
-            Model Name : GeForce RTX™ 3060 Ti VENTUS 2X 8G OCV1 LHR<br>
-            Graphics Processing Unit : NVIDIA® GeForce RTX™ 3060 Ti<br>
-            Interface : PCI Express® Gen 4<br>
-            Cores : 4864 Units<br>
-            Core Clocks : Boost: 1695 MHz<br>
-            Memory Speed : 14 Gbps<br>
-            Memory : 8GB GDDR6<br>
-            Memory Bus : 256-bit<br>
-            Output : DisplayPort x 3 (v1.4a)<br>
-            HDMI x 1 (Supports 4K@120Hz as specified in HDMI 2.1)<br>
-            <br>
-            HDCP Support : Y<br>
-            Power consumption : 200 W<br>
-            Power connectors : 8-pin x 1<br>
-            Recommended PSU : 600 W<br>
-            Card Dimension (mm) : 235 x 124 x 42 mm<br>
-            Weight (Card / Package) : 685 g / 1041 g<br>
-            DirectX Version Support : 12 API<br>
-            OpenGL Version Support : 4.6<br>
-            Multi-GPU Technology : Y<br>
-            Maximum Displays : 4<br>
-            VR Ready : Y<br>
-            G-SYNC® technology : Y<br>
-            Adaptive Vertical Sync : Y<br>
-            Digital Maximum Resolution : 7680 x 4320<br>
-          </p>
+    <!-- Component Details -->
+    <div
+      class="col-sm-3 h-100 position-absolute end-0 d-flex align-items-center px-5 py-5"
+    >
+      <div class="w-100 h-100 bg-light overflow-scroll p-5">
+        <h3 class="text-center">Details</h3>
+        <h5 id="namaKom"></h5>
+        <p id="deskripsi">
+          What does GPU stand for? Graphics processing unit, a specialized
+          processor originally designed to accelerate graphics rendering. GPUs
+          can process many pieces of data simultaneously, making them useful for
+          machine learning, video editing, and gaming applications.
+        </p>
+
+        <h5>In Display : Nvidia GeForce RTX 3060TI 8GB GDDR6</h5>
+        <p>
+          Model Name : GeForce RTX™ 3060 Ti VENTUS 2X 8G OCV1 LHR<br />
+          Graphics Processing Unit : NVIDIA® GeForce RTX™ 3060 Ti<br />
+          Interface : PCI Express® Gen 4<br />
+          Cores : 4864 Units<br />
+          Core Clocks : Boost: 1695 MHz<br />
+          Memory Speed : 14 Gbps<br />
+          Memory : 8GB GDDR6<br />
+          Memory Bus : 256-bit<br />
+          Output : DisplayPort x 3 (v1.4a)<br />
+          HDMI x 1 (Supports 4K@120Hz as specified in HDMI 2.1)<br />
+          <br />
+          HDCP Support : Y<br />
+          Power consumption : 200 W<br />
+          Power connectors : 8-pin x 1<br />
+          Recommended PSU : 600 W<br />
+          Card Dimension (mm) : 235 x 124 x 42 mm<br />
+          Weight (Card / Package) : 685 g / 1041 g<br />
+          DirectX Version Support : 12 API<br />
+          OpenGL Version Support : 4.6<br />
+          Multi-GPU Technology : Y<br />
+          Maximum Displays : 4<br />
+          VR Ready : Y<br />
+          G-SYNC® technology : Y<br />
+          Adaptive Vertical Sync : Y<br />
+          Digital Maximum Resolution : 7680 x 4320<br />
+        </p>
         </div>
       </div>
+    </div>
     <script src="/js/details.js" type="module"></script>
   </body>
 </html>
