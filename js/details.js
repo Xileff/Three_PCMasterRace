@@ -29,8 +29,7 @@ const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeig
 const orbit = createOrbit(camera, renderer.domElement);
 
 // Main part
-// const cpu = new CPU(scene, { x: 0, y: -1, z: -15 }, 'CPU');
-const cpu = new CPU(scene, { x: 0, y: -1, z: -100 }, 'CPU');
+const cpu = new CPU(scene, { x: 0, y: -1, z: -15 }, 'CPU');
 const gpu = new GPU(scene, { x: 0, y: 15, z: 4.3 }, 'GPU');
 const motherboard = new Motherboard(scene, { x: 0, y: 15, z: 4 }, 'Motherboard');
 
@@ -112,7 +111,10 @@ function updateModel(newName, oldName) {
     const modelToHide = gltfModels.filter((m) => m.name.toUpperCase() === oldName.toUpperCase())[0];
 
     modelToShow.fade(modelToShow.speed, -1);
+    // modelToShow.zoom('in');
+
     modelToHide.fade(modelToHide.speed, modelToHide.yMax);
+    // modelToHide.zoom('out');
   }
 }
 

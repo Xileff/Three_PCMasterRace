@@ -5,7 +5,9 @@ class Motherboard extends GLTF {
 
   yMax = 15;
 
-  zInitial = 4;
+  zInitial = 0;
+
+  zView = 4;
 
   speed = 0.1;
 

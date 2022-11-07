@@ -5,7 +5,12 @@ class CPU extends GLTF {
 
   yMax = 100;
 
-  speed = 0.38;
+  // speed = 0.38;
+  speed = 1;
+
+  zInitial = -100;
+
+  zView = -15;
 
   constructor(scene, position, name) {
     super('/models/cpu/scene.gltf', scene, position, name);

@@ -3,9 +3,11 @@ import GLTF from './GLTF';
 class GPU extends GLTF {
   yMin = -15;
 
-  yMax = 15;
+  yMax = 30;
 
-  zInitial = 4.3;
+  zInitial = -20;
+
+  zView = 4.3;
 
   speed = 0.1;
 

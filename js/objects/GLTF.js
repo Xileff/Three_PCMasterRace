@@ -57,6 +57,20 @@ class GLTF {
       console.log(`${this.name} fade up`);
     }
   }
+
+  zoom(direction) {
+    if (this.mesh == undefined || direction == undefined) return;
+
+    if (direction === 'out') {
+      if (this.mesh.scene.position.z > this.zInitial) {
+        this.mesh.scene.position.z -= this.speed;
+      }
+    } else if (direction === 'in') {
+      if (this.mesh.scene.position.z < this.zView) {
+        this.mesh.scene.position.z += this.speed;
+      }
+    }
+  }
 }
 
 export default GLTF;
