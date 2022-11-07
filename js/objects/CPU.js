@@ -5,14 +5,17 @@ class CPU extends GLTF {
 
   yMax = 100;
 
+  speed = 0.38;
+
   constructor(scene, position, name) {
     super('/models/cpu/scene.gltf', scene, position, name);
   }
 
   animate() {
     if (this.mesh == undefined) return;
-    this.mesh.scene.rotation.x += 0.005;
-    this.mesh.scene.rotation.y += 0.005;
+
+    this.mesh.scene.rotation.y = -1.5;
+    this.mesh.scene.rotation.z -= 0.005;
   }
 }
 

@@ -9,9 +9,15 @@ class GLTF {
 
   name;
 
+  speed;
+
   yMin = -20;
 
   yMax = 20;
+
+  zInitial;
+
+  zView;
 
   constructor(url, scene, position, name) {
     new GLTFLoader().load(url, (gltf) => {
@@ -49,32 +55,6 @@ class GLTF {
     if (yTarget > 0 && this.mesh.scene.position.y < yTarget) {
       this.mesh.scene.position.y += speed;
       console.log(`${this.name} fade up`);
-    }
-  }
-
-  getInitialPos() {
-    if (this.mesh == undefined) return;
-    return {
-      x: this.initialPos.x,
-      y: this.initialPos.y,
-    };
-  }
-
-  getX() {
-    if (this.mesh == undefined) return;
-    return this.mesh.scene.position.x;
-  }
-
-  getY() {
-    if (this.mesh == undefined) return;
-    return this.mesh.scene.position.y;
-  }
-
-  moveToTop() {
-    if (this.mesh == undefined) return;
-    if (this.mesh.scene.position.y <= this.yMin) {
-      console.log(`${this.name} moved to top`);
-      this.mesh.scene.position.y = 15;
     }
   }
 }
