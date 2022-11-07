@@ -1,45 +1,49 @@
+/* eslint-disable func-names */
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 // Libraries
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap";
-import { Clock } from "three";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap';
+import { Clock } from 'three';
 
 // Objects
-import Cube from "./objects/Cube";
-import GPU from "./objects/GPU";
-import { createDirectionalLight } from "./utils/directionalLight";
-import { createHemisphereLight } from "./utils/hemisphereLight";
+import Cube from './objects/Cube';
+import GPU from './objects/GPU';
+import CPU from './objects/CPU';
+import { createDirectionalLight } from './utils/directionalLight';
+import { createHemisphereLight } from './utils/hemisphereLight';
 
 // Utils
-import { createOrbit } from "./utils/orbitControl";
-import { animateParticle, createParticles } from "./utils/particles";
-import { createPerspectiveCamera } from "./utils/perspectiveCamera";
-import { createPointLight } from "./utils/pointLight";
+import { createOrbit } from './utils/orbitControl';
+import { animateParticle, createParticles } from './utils/particles';
+import { createPerspectiveCamera } from './utils/perspectiveCamera';
+import { createPointLight } from './utils/pointLight';
 import {
   createRenderer,
   makeResponsiveNonWindow,
   makeResponsiveWindow,
-} from "./utils/renderer";
-import { createScene } from "./utils/scene";
-import { createSpotlight } from "./utils/spotlight";
+} from './utils/renderer';
+import { createScene } from './utils/scene';
+import { createSpotlight } from './utils/spotlight';
 
 // Preparation
 const renderer = createRenderer(
   window.innerWidth,
   window.innerHeight,
-  0x000000
+  0x000000,
 );
 const scene = createScene();
 const camera = createPerspectiveCamera(
   120,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  1000,
 );
 const orbit = createOrbit(camera, renderer.domElement);
 
 // Main part
-// const cube = new Cube(2, { x: 0, y: 0, z: 0 }, 0x0000ff);
-const gpu = new GPU(scene, { x: 0, y: -1, z: 3.5 });
+const gpu = new GPU(scene, { x: 0, y: 15, z: 3.5 }, 'GPU');
+const cpu = new CPU(scene, { x: 0, y: -1, z: -15 }, 'CPU');
 
 // Lightings
 const hemisphereLight = createHemisphereLight(0xffffff, 0xffffff, 1, {
@@ -133,9 +137,17 @@ const objects = [
   spotlight2,
   particlesMesh,
 ];
+const gltfModels = [
+  cpu,
+  gpu,
+];
 
 objects.forEach((o) => scene.add(o));
 
+// Initialize global var for tracking current option
+
+let currentOption = 'CPU';
+let previousOption = currentOption;
 start();
 
 // Functions
@@ -144,6 +156,9 @@ function start() {
   document.body.appendChild(renderer.domElement);
 
   renderer.render(scene, camera);
+  // TODO : sebelum animate(), kasi loading dlu biar semua model 3d pasti udah bukan undefined
+  // Karena waktu load masing2 model beda. ada yg cpet ada yg lama
+  // Coba aja baru buka webnya lgsg pilih GPU. pasti crash
   animate();
   makeResponsiveWindow(window, renderer, camera);
 }
@@ -152,33 +167,51 @@ function animate() {
   requestAnimationFrame(animate);
 
   orbit.update();
-  // cube.animate();
-  gpu.animate();
-  // gpu.fade(0.07, 10);
-  // gpu.fade(0.07, -10);
+  gltfModels.forEach((m) => m.animate());
+  // Change component
+  console.log(`Current option ${currentOption}`);
+  console.log(`Previous option ${previousOption}`);
+
+  if (currentOption !== previousOption) {
+    changeComponent(currentOption, previousOption);
+  }
+
   animateParticle(particlesMesh);
 
   renderer.render(scene, camera);
 }
 
+function changeComponent(newName, oldName) {
+  if (newName == undefined || oldName == undefined) return;
+
+  const modelToShow = gltfModels.filter((m) => m.name.toUpperCase() === newName.toUpperCase())[0];
+  const modelToHide = gltfModels.filter((m) => m.name.toUpperCase() === oldName.toUpperCase())[0];
+
+  modelToShow.fade(1, -1);
+  modelToHide.fade(1, modelToHide.yMax);
+}
+
 // Script andu, buat ubah2 teks di halaman det
+$('.list-group-item').on('click', function () {
+  $('.list-group-item').removeClass('active');
+  $(this).addClass('active');
 
+  const selectedComponent = $(this).html();
+  $('#namaKom').html(selectedComponent);
 
-$(".list-group-item").on("click", function () {
-  $(".list-group-item").removeClass("active");
-  $(this).addClass("active");
-  let daftarKomponen = $(this).html();
-  $("h5").html(daftarKomponen);
+  $.getJSON('../JSON/komponen.json', (allData) => {
+    const { komponen } = allData;
 
-  $.getJSON("../JSON/komponen.json", function (data) {
-    let komponen = data.komponen;
     let detail = '';
-    console.log(komponen);
-    $.each(komponen, function(i, data){
-    if (data.nama.toUpperCase() == daftarKomponen.toUpperCase()) {
-      detail += '<p>' + data.deskripsi + '</p>';
-    } 
-  });
-  $("#deskripsi").html(detail);
+    $.each(komponen, (i, data) => {
+      if (data.nama.toUpperCase() == selectedComponent.toUpperCase()) {
+        // Swap global var
+        previousOption = currentOption;
+        currentOption = data.nama.toUpperCase();
+
+        detail += `<p>${data.deskripsi}</p>`;
+      }
+    });
+    $('#deskripsi').html(detail);
   });
 });

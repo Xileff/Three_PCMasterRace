@@ -5,10 +5,19 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 class GLTF {
   mesh;
 
-  constructor(url, scene, position) {
+  initialPos;
+
+  name;
+
+  yMin = -20;
+
+  yMax = 20;
+
+  constructor(url, scene, position, name) {
     new GLTFLoader().load(url, (gltf) => {
       this.mesh = gltf;
       this.initialPos = position;
+      this.name = name;
 
       this.mesh.scene.position.x = position.x;
       this.mesh.scene.position.y = position.y;
@@ -27,27 +36,19 @@ class GLTF {
     this.mesh.scene.rotation.y += 0.005;
   }
 
-  // fadeDiagonal(speed, pos){
-  //   if(this.mesh == undefined) return;
-  //   const { xTarget, yTarget } = pos;
-  //   const { x, y } = this.getInitialPos();
-
-  //   if(xTarget === x && yTarget === y){
-  //     // Gausah di
-  //   }
-  // }
-
   fade(speed, yTarget) {
     if (this.mesh == undefined) return;
 
     // Fade down
     if (yTarget < 0 && this.mesh.scene.position.y > yTarget) {
       this.mesh.scene.position.y -= speed;
+      console.log(`${this.name} fade down`);
     }
 
     // Fade up
     if (yTarget > 0 && this.mesh.scene.position.y < yTarget) {
       this.mesh.scene.position.y += speed;
+      console.log(`${this.name} fade up`);
     }
   }
 
@@ -57,6 +58,24 @@ class GLTF {
       x: this.initialPos.x,
       y: this.initialPos.y,
     };
+  }
+
+  getX() {
+    if (this.mesh == undefined) return;
+    return this.mesh.scene.position.x;
+  }
+
+  getY() {
+    if (this.mesh == undefined) return;
+    return this.mesh.scene.position.y;
+  }
+
+  moveToTop() {
+    if (this.mesh == undefined) return;
+    if (this.mesh.scene.position.y <= this.yMin) {
+      console.log(`${this.name} moved to top`);
+      this.mesh.scene.position.y = 15;
+    }
   }
 }
 

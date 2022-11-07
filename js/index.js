@@ -60,7 +60,7 @@ const orbit = createOrbit(camera, renderer.domElement);
 // PC, meja, dan sphere sebagai pembungkus
 const sphere = createSphere(200, 32, 16, 0x000000);
 const sphereWireframe = creatSphereWireframe(200, 54, 27);
-const pc = new PC(scene, { x: 0, y: 0, z: 0 });
+const pc = new PC(scene, { x: 0, y: 0, z: 0 }, 'PC');
 // const desk = createPlane(0xaaa9ad, 8, 8, {x: 0, y: -3.8, z: 0})
 
 sphere.rotation.set(0, 0, 90);
