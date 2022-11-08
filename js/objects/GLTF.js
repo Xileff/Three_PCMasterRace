@@ -48,16 +48,15 @@ class GLTF {
     // Fade down
     if (yTarget < 0 && this.mesh.scene.position.y > yTarget) {
       this.mesh.scene.position.y -= speed;
-      console.log(`${this.name} fade down`);
     }
 
     // Fade up
     if (yTarget > 0 && this.mesh.scene.position.y < yTarget) {
       this.mesh.scene.position.y += speed;
-      console.log(`${this.name} fade up`);
     }
   }
 
+  // still experimental
   zoom(direction) {
     if (this.mesh == undefined || direction == undefined) return;
 
