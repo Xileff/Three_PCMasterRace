@@ -19,11 +19,14 @@ class GLTF {
 
   zView;
 
+  scene;
+
   constructor(url, scene, position, name) {
     new GLTFLoader().load(url, (gltf) => {
       this.mesh = gltf;
       this.initialPos = position;
       this.name = name;
+      this.scene = scene;
 
       this.mesh.scene.position.x = position.x;
       this.mesh.scene.position.y = position.y;
@@ -69,6 +72,11 @@ class GLTF {
         this.mesh.scene.position.z += this.speed;
       }
     }
+  }
+
+  // check if mesh is loaded
+  meshIsLoading() {
+    return this.mesh == undefined;
   }
 }
 

@@ -95,7 +95,15 @@ function animate() {
   requestAnimationFrame(animate);
 
   orbit.update();
-  gltfModels.forEach((m) => m.animate());
+
+  gltfModels.forEach((m) => {
+    if (!m.meshIsLoading()) {
+      document.getElementById('loader').style.display = 'none';
+      m.animate();
+    } else {
+      document.getElementById('loader').style.display = 'flex';
+    }
+  });
 
   updateModel(currentOption, previousOption);
   animateParticle(particlesMesh);

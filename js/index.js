@@ -96,10 +96,13 @@ function animate() {
   requestAnimationFrame(animate);
 
   orbit.update();
-  pc.animate();
-
   rotateFreely(sphere);
   rotateFreelyReverse(sphereWireframe);
+
+  if (!pc.meshIsLoading()) {
+    document.getElementById('loader').style.display = 'none';
+    pc.animate();
+  }
 
   renderer.render(scene, camera);
 }
