@@ -3,13 +3,8 @@
     {
       "nama": "CPU",
       "deskripsi": "A central processing unit (CPU), also called a central processor, main processor or just processor, is the electronic circuitry that executes instructions comprising a computer program. The CPU performs basic arithmetic, logic, controlling, and input/output (I/O) operations specified by the instructions in the program. This contrasts with external components such as main memory and I/O circuitry,[1] and specialized processors such as graphics processing units (GPUs).The form, design, and implementation of CPUs have changed over time, but their fundamental operation remains almost unchanged. Principal components of a CPU include the arithmetic–logic unit (ALU) that performs arithmetic and logic operations, processor registers that supply operands to the ALU and store the results of ALU operations, and a control unit that orchestrates the fetching (from memory), decoding and execution (of instructions) by directing the coordinated operations of the ALU, registers and other components.",
-      "jenis": "AMD Ryzen 5 3600",
-      "core": 6,
-      "baseclock": "3.6 GHz",
-      "cache": "32 MB",
-      "overclocking": "yes",
-      "TDP": "65W",
-      "socket": "AM4"
+      "nama-produk": "AMD Ryzen 5 3600",
+      "deskripsi-produk": "Product Family:AMD Ryzen Processors\nCPU Cores: 6\nThreads: 12\nMax BoostClock: Up to 4.2GHz\nBase Clock: 3.6GHz\nDefault TDP: 65W\nCPU Socket: AM4"
     },
     {
       "nama": "GPU",
@@ -19,11 +14,15 @@
     },
     {
       "nama": "Motherboard",
-      "deskripsi": "A motherboard (also called mainboard, main circuit board,[1] mb, mboard, backplane board, base board, system board, logic board (only in Apple computers) or mobo) is the main printed circuit board (PCB) in general-purpose computers and other expandable systems."
+      "deskripsi": "A motherboard (also called mainboard, main circuit board,[1] mb, mboard, backplane board, base board, system board, logic board (only in Apple computers) or mobo) is the main printed circuit board (PCB) in general-purpose computers and other expandable systems.",
+      "nama-produk":"ASROCK B450M Pro4",
+      "deskripsi-produk":"Support Socket: AM4\n Support Ram: DDR4 3200+\n Slot PCIE: 1\n Support AMD Quad CrossFireX: Yes\n Graphic Output: HDMI, DVI-D, D-Sub\n Support 7.1: Yes\n SATA3 Slot: 4\n Ultra M.2 Slot: 1\n M.2 SATA Slot: 1\n Slot USB: 8\n LAN: Realtek Gigabit LAN"
     },
     {
       "nama": "RAM",
-      "deskripsi": "Random-access memory (RAM; /ræm/) is a form of computer memory that can be read and changed in any order, typically used to store working data and machine code."
+      "deskripsi": "Random-access memory (RAM; /ræm/) is a form of computer memory that can be read and changed in any order, typically used to store working data and machine code.",
+      "nama-produk":"G.SKILL Trident Z",
+      "deskripsi-produk":"Capacity: 8GB (1x8)\n XMP 2.0: Yes\n Frequency: 3200MHz\n Voltage: 1.35V\n RGB: Yes"
     },
     {
       "nama": "M.2",
