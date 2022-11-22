@@ -6,12 +6,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 
-// Objects
-import GPU from './objects/GPU';
-import CPU from './objects/CPU';
-import { createDirectionalLight } from './utils/directionalLight';
-import { createHemisphereLight } from './utils/hemisphereLight';
-
 // Utils
 import { createOrbit } from './utils/orbitControl';
 import { animateParticle, createParticles } from './utils/particles';
@@ -20,7 +14,17 @@ import { createPointLight } from './utils/pointLight';
 import { createRenderer, makeResponsiveWindow } from './utils/renderer';
 import { createScene } from './utils/scene';
 import { createSpotlight } from './utils/spotlight';
+import { createDirectionalLight } from './utils/directionalLight';
+import { createHemisphereLight } from './utils/hemisphereLight';
+
+// Objects
+import GPU from './objects/GPU';
+import CPU from './objects/CPU';
 import Motherboard from './objects/Motherboard';
+import RAM from './objects/RAM';
+import PSU from './objects/PSU';
+import SataSSD from './objects/SataSSD';
+import HDD from './objects/HDD';
 
 // Preparation
 const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
@@ -29,9 +33,13 @@ const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeig
 const orbit = createOrbit(camera, renderer.domElement);
 
 // Main part
-const cpu = new CPU(scene, { x: 0, y: -1, z: -15 }, 'CPU');
-const gpu = new GPU(scene, { x: 0, y: 15, z: 4.3 }, 'GPU');
-const motherboard = new Motherboard(scene, { x: 0, y: 15, z: 4 }, 'Motherboard');
+const cpu = new CPU(scene, { x: 0, y: -3, z: -15 }, 'CPU');
+const gpu = new GPU(scene, { x: 0, y: 20, z: 4.3 }, 'GPU');
+const motherboard = new Motherboard(scene, { x: 0, y: 20, z: 4 }, 'Motherboard');
+const ram = new RAM(scene, { x: 0, y: 20, z: 2 }, 'RAM');
+const psu = new PSU(scene, { x: 0, y: 20, z: 2 }, 'PSU');
+const ssd = new SataSSD(scene, { x: 0, y: 20, z: 2 }, 'Sata SSD');
+const hdd = new HDD(scene, { x: 0, y: 20, z: 2 }, 'HDD');
 
 // Lightings
 const hemisphereLight = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 0, z: 0 });
@@ -40,8 +48,6 @@ const hemisphereLightx1 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 2, y
 const hemisphereLightx2 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: -2, y: 0, z: 0 });
 const hemisphereLighty1 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 2, z: 0 });
 const hemisphereLighty2 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 2, z: 0 });
-const hemisphereLightz1 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 0, z: 4 });
-const hemisphereLightz2 = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 0, z: -2 });
 
 // Di depan, belakang, kanan, kiri pc
 const directionalLight = createDirectionalLight(0xffffff, { x: 10, y: 0, z: 0 });
@@ -72,7 +78,7 @@ const objects = [
   particlesMesh,
 ];
 
-const gltfModels = [cpu, gpu, motherboard];
+const gltfModels = [cpu, gpu, motherboard, ram, psu, ssd, hdd];
 
 objects.forEach((o) => scene.add(o));
 
@@ -118,10 +124,10 @@ function updateModel(newName, oldName) {
     const modelToShow = gltfModels.filter((m) => m.name.toUpperCase() === newName.toUpperCase())[0];
     const modelToHide = gltfModels.filter((m) => m.name.toUpperCase() === oldName.toUpperCase())[0];
 
-    modelToShow.fade(modelToShow.speed, -1);
+    modelToShow.fade(modelToShow.speed, modelToShow.yMin);
     // modelToShow.zoom('in');
 
-    modelToHide.fade(modelToHide.speed, modelToHide.yMax);
+    modelToHide.fade(modelToHide.speed, modelToShow.yMax);
     // modelToHide.zoom('out');
   }
 }

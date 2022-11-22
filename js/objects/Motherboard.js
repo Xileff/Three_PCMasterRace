@@ -1,9 +1,9 @@
 import GLTF from './GLTF';
 
 class Motherboard extends GLTF {
-  yMin = -15;
+  static yMin = -1;
 
-  yMax = 15;
+  // yMax = 15;
 
   zInitial = 0;
 

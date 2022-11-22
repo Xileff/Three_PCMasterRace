@@ -18,7 +18,7 @@ const createSphere = (radius, widthSegments, heightSegments, color) => new Mesh(
   }),
 );
 
-const creatSphereWireframe = (radius, widthSegments, heightSegments, opacity = 0.4, depthTest = true, transparent = true) => {
+const createSphereWireframe = (radius, widthSegments, heightSegments, opacity = 0.4, depthTest = true, transparent = true) => {
   const sWireframe = new LineSegments(
     new WireframeGeometry(
       new SphereGeometry(radius, widthSegments, heightSegments),
@@ -41,5 +41,5 @@ const rotateFreelyReverse = (sphere) => {
 };
 
 export {
-  createSphere, creatSphereWireframe, rotateFreely, rotateFreelyReverse,
+  createSphere, createSphereWireframe, rotateFreely, rotateFreelyReverse,
 };

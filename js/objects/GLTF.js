@@ -9,11 +9,11 @@ class GLTF {
 
   name;
 
-  speed;
+  speed = 1;
 
-  yMin = -20;
+  yMin = -2;
 
-  yMax = 20;
+  yMax = 100;
 
   zInitial;
 

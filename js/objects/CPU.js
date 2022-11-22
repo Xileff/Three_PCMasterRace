@@ -1,12 +1,9 @@
 import GLTF from './GLTF';
 
 class CPU extends GLTF {
-  yMin = -30;
+  yMin = -3;
 
-  yMax = 100;
-
-  // speed = 0.38;
-  speed = 1;
+  // yMax = 100;
 
   zInitial = -100;
 
