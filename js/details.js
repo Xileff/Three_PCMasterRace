@@ -138,22 +138,29 @@ $('.list-group-item').on('click', function () {
   $(this).addClass('active');
 
   const selectedComponent = $(this).html();
-  $('#namaKom').html(selectedComponent);
+  $('#nama').html(selectedComponent);
   $('#headingName').html(selectedComponent);
 
   $.getJSON('../JSON/komponen.json', (allData) => {
     const { komponen } = allData;
 
-    let detail = '';
+    let deskripsi = '';
+    let namaProduk = '';
+    let deksripsiProduk = '';
+
     $.each(komponen, (i, data) => {
       if (data.nama.toUpperCase() == selectedComponent.toUpperCase()) {
         // Swap global var
         previousOption = currentOption;
         currentOption = data.nama.toUpperCase();
 
-        detail += `<p>${data.deskripsi}</p>`;
+        deskripsi += `<p>${data.deskripsi}</p>`;
+        namaProduk = `In Display : ${data.nama_produk}`;
+        deksripsiProduk = `${data.deskripsi_produk.replaceAll('\n', '<br>')}`;
       }
     });
-    $('#deskripsi').html(detail);
+    $('#deskripsi').html(deskripsi);
+    $('#nama-produk').html(namaProduk);
+    $('#deskripsi-produk').html(deksripsiProduk);
   });
 });
