@@ -1,14 +1,19 @@
 import GLTF from './GLTF';
 
 class GPU extends GLTF {
-  constructor(scene, position) {
-    super('/models/gpu/scene.gltf', scene, position);
-  }
+  yMin = -1;
 
-  // animate(){
-  //   if (this.mesh == undefined) return;
-  //   this.mesh.scene.rotation.y += 0.005;
-  // }
+  // yMax = 30;
+
+  zInitial = -20;
+
+  zView = 4.3;
+
+  speed = 0.1;
+
+  constructor(scene, position, name) {
+    super('/models/gpu/scene.gltf', scene, position, name);
+  }
 }
 
 export default GPU;

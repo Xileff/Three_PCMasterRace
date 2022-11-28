@@ -6,13 +6,12 @@ const loader = new TextureLoader();
 
 const createParticles = (count, size) => {
   const particlesGeometry = new BufferGeometry();
-  const particlesCount = 5000;
+  const particlesCount = count;
   const posArray = new Float32Array(particlesCount * 3);
   const material = new PointsMaterial({
-    size: 0.3,
+    size,
     map: loader.load('/images/stars.png'),
     transparent: true,
-    // color: 0xffffff
   });
 
   for (let i = 0; i < particlesCount * 3; i++) {

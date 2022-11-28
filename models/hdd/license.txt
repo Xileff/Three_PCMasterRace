@@ -1,0 +1,11 @@
+Model Information:
+* title:	Western Digital WD10JPVT Laptop Hard Drive
+* source:	https://sketchfab.com/3d-models/western-digital-wd10jpvt-laptop-hard-drive-345aac50036547c69febac5ed9c2f072
+* author:	Logansryche (https://sketchfab.com/Logansryche)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Western Digital WD10JPVT Laptop Hard Drive" (https://sketchfab.com/3d-models/western-digital-wd10jpvt-laptop-hard-drive-345aac50036547c69febac5ed9c2f072) by Logansryche (https://sketchfab.com/Logansryche) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

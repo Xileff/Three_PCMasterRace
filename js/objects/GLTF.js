@@ -5,10 +5,28 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 class GLTF {
   mesh;
 
-  constructor(url, scene, position) {
+  initialPos;
+
+  name;
+
+  speed = 1;
+
+  yMin = -2;
+
+  yMax = 100;
+
+  zInitial;
+
+  zView;
+
+  scene;
+
+  constructor(url, scene, position, name) {
     new GLTFLoader().load(url, (gltf) => {
       this.mesh = gltf;
       this.initialPos = position;
+      this.name = name;
+      this.scene = scene;
 
       this.mesh.scene.position.x = position.x;
       this.mesh.scene.position.y = position.y;
@@ -27,16 +45,6 @@ class GLTF {
     this.mesh.scene.rotation.y += 0.005;
   }
 
-  // fadeDiagonal(speed, pos){
-  //   if(this.mesh == undefined) return;
-  //   const { xTarget, yTarget } = pos;
-  //   const { x, y } = this.getInitialPos();
-
-  //   if(xTarget === x && yTarget === y){
-  //     // Gausah di
-  //   }
-  // }
-
   fade(speed, yTarget) {
     if (this.mesh == undefined) return;
 
@@ -51,12 +59,24 @@ class GLTF {
     }
   }
 
-  getInitialPos() {
-    if (this.mesh == undefined) return;
-    return {
-      x: this.initialPos.x,
-      y: this.initialPos.y,
-    };
+  // still experimental
+  zoom(direction) {
+    if (this.mesh == undefined || direction == undefined) return;
+
+    if (direction === 'out') {
+      if (this.mesh.scene.position.z > this.zInitial) {
+        this.mesh.scene.position.z -= this.speed;
+      }
+    } else if (direction === 'in') {
+      if (this.mesh.scene.position.z < this.zView) {
+        this.mesh.scene.position.z += this.speed;
+      }
+    }
+  }
+
+  // check if mesh is loaded
+  meshIsLoading() {
+    return this.mesh == undefined;
   }
 }
 
