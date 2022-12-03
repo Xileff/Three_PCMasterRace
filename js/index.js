@@ -17,7 +17,7 @@ import { createDirectionalLight } from './utils/directionalLight';
 import { createPointLight } from './utils/pointLight';
 import { createHemisphereLight } from './utils/hemisphereLight';
 import {
-  createSphere, creatSphereWireframe, rotateFreely, rotateFreelyReverse,
+  createSphere, createSphereWireframe, rotateFreely, rotateFreelyReverse,
 } from './utils/sphere';
 
 const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
@@ -27,8 +27,8 @@ const orbit = createOrbit(camera, renderer.domElement);
 
 // PC, meja, dan sphere sebagai pembungkus
 const sphere = createSphere(200, 32, 16, 0x000000);
-const sphereWireframe = creatSphereWireframe(200, 54, 27);
-const pc = new PC(scene, { x: 0, y: 0, z: 0 }, 'PC');
+const sphereWireframe = createSphereWireframe(200, 54, 27);
+const pc = new PC(scene, { x: 0, y: 0, z: 0 }, 'PC', { x: 0, y: 0, z: 0 });
 
 sphere.rotation.set(0, 0, 90);
 sphereWireframe.rotation.set(0, 0, 90);

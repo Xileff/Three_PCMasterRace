@@ -7,12 +7,12 @@ class GPU extends GLTF {
 
   zInitial = -20;
 
-  zView = 4.3;
+  viewDistance = 3;
 
   speed = 0.1;
 
-  constructor(scene, position, name) {
-    super('/models/gpu/scene.gltf', scene, position, name);
+  constructor(scene, position, name, rotation) {
+    super('/models/gpu/scene.gltf', scene, position, name, rotation);
   }
 }
 

@@ -7,8 +7,10 @@ class PSU extends GLTF {
 
   speed = 0.25;
 
-  constructor(scene, position, name) {
-    super('/models/powersupply/scene.gltf', scene, position, name);
+  viewDistance = 3;
+
+  constructor(scene, position, name, rotation) {
+    super('/models/powersupply/scene.gltf', scene, position, name, rotation);
   }
 }
 

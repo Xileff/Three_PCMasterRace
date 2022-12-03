@@ -7,10 +7,10 @@ class CPU extends GLTF {
 
   zInitial = -100;
 
-  zView = -15;
+  viewDistance = 15;
 
-  constructor(scene, position, name) {
-    super('/models/cpu/scene.gltf', scene, position, name);
+  constructor(scene, position, name, rotation) {
+    super('/models/cpu/scene.gltf', scene, position, name, rotation);
   }
 
   animate() {

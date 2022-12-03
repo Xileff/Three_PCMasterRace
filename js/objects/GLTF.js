@@ -17,11 +17,11 @@ class GLTF {
 
   zInitial;
 
-  zView;
+  viewDistance;
 
   scene;
 
-  constructor(url, scene, position, name) {
+  constructor(url, scene, position, name, rotation) {
     new GLTFLoader().load(url, (gltf) => {
       this.mesh = gltf;
       this.initialPos = position;
@@ -32,12 +32,43 @@ class GLTF {
       this.mesh.scene.position.y = position.y;
       this.mesh.scene.position.z = position.z;
 
+      this.mesh.scene.rotation.x = rotation.x;
+      this.mesh.scene.rotation.y = rotation.y;
+      this.mesh.scene.rotation.z = rotation.z;
+
       this.mesh.scene.traverse((node) => {
         node.castShadow = node.isMesh;
       });
 
       scene.add(this.mesh.scene);
     });
+  }
+
+  getX() {
+    if (this.mesh == undefined) return;
+    return this.mesh.scene.position.x;
+  }
+
+  getY() {
+    if (this.mesh == undefined) return;
+    return this.mesh.scene.position.y;
+  }
+
+  getZ() {
+    if (this.mesh == undefined) return;
+    return this.mesh.scene.position.z;
+  }
+
+  getViewDistance() {
+    if (this.mesh == undefined) return;
+    return this.viewDistance;
+  }
+
+  setRotation(x, y, z) {
+    if (this.mesh == undefined) return;
+    this.mesh.scene.rotation.x = x;
+    this.mesh.scene.rotation.y = y;
+    this.mesh.scene.rotation.z = z;
   }
 
   animate() {

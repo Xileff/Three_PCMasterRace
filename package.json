@@ -16,8 +16,9 @@
     "vite": "^3.1.0"
   },
   "dependencies": {
-    "bootstrap": "^5.2.2",
+    "bootstrap": "^5.2.3",
     "dat.gui": "^0.7.9",
+    "gsap": "^3.11.3",
     "three": "^0.145.0"
   }
 }

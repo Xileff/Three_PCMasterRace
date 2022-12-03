@@ -7,8 +7,10 @@ class RAM extends GLTF {
 
   speed = 0.25;
 
-  constructor(scene, position, name) {
-    super('/models/RAM/scene.gltf', scene, position, name);
+  viewDistance = 4;
+
+  constructor(scene, position, name, rotation) {
+    super('/models/RAM/scene.gltf', scene, position, name, rotation);
   }
 }
 

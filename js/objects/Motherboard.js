@@ -7,12 +7,12 @@ class Motherboard extends GLTF {
 
   zInitial = 0;
 
-  zView = 4;
+  viewDistance = 4;
 
   speed = 0.1;
 
-  constructor(scene, position, name) {
-    super('/models/motherboard_am4/scene.gltf', scene, position, name);
+  constructor(scene, position, name, rotation) {
+    super('/models/motherboard_am4/scene.gltf', scene, position, name, rotation);
   }
 
   animate() {
