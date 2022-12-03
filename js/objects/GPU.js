@@ -7,7 +7,9 @@ class GPU extends GLTF {
 
   zInitial = -20;
 
-  viewDistance = 3;
+  viewDistance = 2;
+
+  viewHeight = 1.1;
 
   speed = 0.1;
 

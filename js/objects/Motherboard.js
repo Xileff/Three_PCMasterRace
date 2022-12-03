@@ -7,7 +7,9 @@ class Motherboard extends GLTF {
 
   zInitial = 0;
 
-  viewDistance = 4;
+  viewDistance = 2.5;
+
+  viewHeight = 0;
 
   speed = 0.1;
 

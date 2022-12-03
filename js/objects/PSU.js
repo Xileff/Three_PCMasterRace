@@ -9,6 +9,8 @@ class PSU extends GLTF {
 
   viewDistance = 3;
 
+  viewHeight = 1;
+
   constructor(scene, position, name, rotation) {
     super('/models/powersupply/scene.gltf', scene, position, name, rotation);
   }

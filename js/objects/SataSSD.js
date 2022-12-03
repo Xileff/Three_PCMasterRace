@@ -1,14 +1,14 @@
 import GLTF from './GLTF';
 
 class SataSSD extends GLTF {
-  yMin = -1.5;
+  viewDistance = -2.5;
 
-  // yMax = 15;
+  viewHeight = 0.75;
 
-  speed = 0.25;
+  speed = 0.1;
 
-  constructor(scene, position, name) {
-    super('/models/ssd/scene.gltf', scene, position, name);
+  constructor(scene, position, name, rotation) {
+    super('/models/ssd/scene.gltf', scene, position, name, rotation);
   }
 }
 

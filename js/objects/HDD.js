@@ -1,15 +1,17 @@
 import GLTF from './GLTF';
 
-class HDD extends GLTF {
-  yMin = -20;
-
-  yMax = 20;
+class NvmeSSD extends GLTF {
+  yMin = -3;
 
   speed = 0.25;
 
-  constructor(scene, position, name) {
-    super('/models/hdd/scene.gltf', scene, position, name);
+  viewDistance = -5; // -5
+
+  viewHeight = 0;
+
+  constructor(scene, position, name, rotation) {
+    super('/models/hdd/scene.gltf', scene, position, name, rotation);
   }
 }
 
-export default HDD;
+export default NvmeSSD;

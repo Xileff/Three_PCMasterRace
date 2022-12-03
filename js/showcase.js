@@ -22,9 +22,10 @@ import GPU from './objects/GPU';
 import CPU from './objects/CPU';
 import Motherboard from './objects/Motherboard';
 import RAM from './objects/RAM';
-import PSU from './objects/PSU';
+import NvmeSSD from './objects/NvmeSSD';
 import SataSSD from './objects/SataSSD';
 import HDD from './objects/HDD';
+import PSU from './objects/PSU';
 
 // Preparation
 const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
@@ -32,11 +33,16 @@ const scene = createScene();
 const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 // Main part
+// cpu : { x: -40, y: 100, z: 0 }
+// sata ssd : { x: -40, y: -100, z: 0 }
 const cpu = new CPU(scene, { x: -40, y: 100, z: 0 }, 'CPU', { x: 1.6, y: 4.7, z: 0 });
-const gpu = new GPU(scene, { x: 40, y: 70, z: 0 }, 'GPU', { x: 0, y: 0, z: 0 });
+const gpu = new GPU(scene, { x: 40, y: 100, z: 0 }, 'GPU', { x: 0, y: 0, z: 0 });
 const motherboard = new Motherboard(scene, { x: 50, y: 50, z: 0 }, 'Motherboard', { x: 1.5, y: 0, z: 0 });
 const ram = new RAM(scene, { x: 50, y: -50, z: 0 }, 'RAM', { x: 0, y: 0, z: 0 });
-const psu = new PSU(scene, { x: 40, y: -100, z: 0 }, 'PSU', { x: 0, y: 0.6, z: 0 });
+const nvmessd = new NvmeSSD(scene, { x: 40, y: -100, z: 0 }, 'M.2 NVME SSD', { x: 1.5, y: 0, z: 0 });
+const satassd = new SataSSD(scene, { x: -40, y: -100, z: 0 }, 'SATA SSD', { x: 0, y: 0.73, z: 0 });
+const hdd = new HDD(scene, { x: -50, y: -50, z: -3 }, 'HDD', { x: -0.2, y: 1.05, z: 0 });
+const psu = new PSU(scene, { x: -50, y: 50, z: 0 }, 'PSU', { x: 0, y: 0.6, z: 0 });
 
 // Lightings
 const hemisphereLight = createHemisphereLight(0xffffff, 0xffffff, 1, { x: 0, y: 0, z: 0 });
@@ -77,14 +83,14 @@ const objects = [
 
 let currentOption = 'CPU';
 let previousOption = currentOption;
-const gltfModels = [cpu, gpu, motherboard, ram, psu];
+const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
 
 objects.forEach((o) => scene.add(o));
 start();
 
 // Functions
 function start() {
-  camera.position.set(50, -49, 4);
+  camera.position.set(-40, 100, 25);
   document.body.appendChild(renderer.domElement);
   renderer.render(scene, camera);
   animate();
@@ -105,7 +111,7 @@ function updateModel(newName) {
 
     gsap.to(camera.position, {
       x: modelToShow.getX(),
-      y: modelToShow.getY() + 1,
+      y: modelToShow.getY() + modelToShow.getViewHeight(),
       z: modelToShow.getZ() + modelToShow.getViewDistance(),
       duration: 1.5,
       ease: true,
@@ -135,6 +141,9 @@ $('.list-group-item').on('click', function () {
         previousOption = currentOption;
         currentOption = data.nama.toUpperCase();
 
+        // console.log('Prev : ' + previousOption);
+        // console.log('Current : ' + currentOption);
+
         deskripsi += `<p>${data.deskripsi}</p>`;
         namaProduk = `In Display : ${data.nama_produk}`;
         deksripsiProduk = `${data.deskripsi_produk.replaceAll('\n', '<br>')}`;
@@ -145,3 +154,5 @@ $('.list-group-item').on('click', function () {
     $('#deskripsi-produk').html(deksripsiProduk);
   });
 });
+
+// canvas onclick zoom

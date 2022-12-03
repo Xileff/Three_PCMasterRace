@@ -19,6 +19,8 @@ class GLTF {
 
   viewDistance;
 
+  viewHeight;
+
   scene;
 
   constructor(url, scene, position, name, rotation) {
@@ -62,6 +64,11 @@ class GLTF {
   getViewDistance() {
     if (this.mesh == undefined) return;
     return this.viewDistance;
+  }
+
+  getViewHeight() {
+    if (this.mesh == undefined) return;
+    return this.viewHeight;
   }
 
   setRotation(x, y, z) {

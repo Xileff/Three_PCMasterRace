@@ -9,6 +9,8 @@ class RAM extends GLTF {
 
   viewDistance = 4;
 
+  viewHeight = 3;
+
   constructor(scene, position, name, rotation) {
     super('/models/RAM/scene.gltf', scene, position, name, rotation);
   }
