@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-unresolved */
+import { Box3, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 
 class GLTF {
@@ -97,19 +98,14 @@ class GLTF {
     }
   }
 
-  // still experimental
-  zoom(direction) {
-    if (this.mesh == undefined || direction == undefined) return;
+  getMeshPos() {
+    if (this.mesh === undefined) return;
 
-    if (direction === 'out') {
-      if (this.mesh.scene.position.z > this.zInitial) {
-        this.mesh.scene.position.z -= this.speed;
-      }
-    } else if (direction === 'in') {
-      if (this.mesh.scene.position.z < this.zView) {
-        this.mesh.scene.position.z += this.speed;
-      }
-    }
+    const aabb = new Box3().setFromObject(this.mesh.scene);
+    const center = aabb.getCenter(new Vector3());
+    const size = aabb.getSize(new Vector3());
+
+    return { center, size };
   }
 
   // check if mesh is loaded

@@ -6,8 +6,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 import gsap from 'gsap';
+import Stats from 'stats.js';
 
 // Utils
+import { createOrbit } from './utils/orbitControl';
 import { animateParticle, createParticles } from './utils/particles';
 import { createPerspectiveCamera } from './utils/perspectiveCamera';
 import { createPointLight } from './utils/pointLight';
@@ -31,10 +33,11 @@ import PSU from './objects/PSU';
 const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
 const scene = createScene();
 const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(-40, 100, 25);
+camera.lookAt(-40, 100, 0);
+let orbit = createOrbit(camera, renderer.domElement);
 
 // Main part
-// cpu : { x: -40, y: 100, z: 0 }
-// sata ssd : { x: -40, y: -100, z: 0 }
 const cpu = new CPU(scene, { x: -40, y: 100, z: 0 }, 'CPU', { x: 1.6, y: 4.7, z: 0 });
 const gpu = new GPU(scene, { x: 40, y: 100, z: 0 }, 'GPU', { x: 0, y: 0, z: 0 });
 const motherboard = new Motherboard(scene, { x: 50, y: 50, z: 0 }, 'Motherboard', { x: 1.5, y: 0, z: 0 });
@@ -61,7 +64,7 @@ const spotlight = createSpotlight(0xffffff, 1, { x: 4, y: 6, z: 4 }, 0.1, 1);
 const spotlight1 = createSpotlight(0xff0000, 1, { x: -4, y: 6, z: -4 }, 0.1, 1);
 const spotlight2 = createSpotlight(0x0000ff, 1, { x: 4, y: 6, z: -4 }, 0.1, 1);
 
-const particlesMesh = createParticles(50000, 0.2);
+const particlesMesh = createParticles(50000, 0.3);
 
 // Put all objects in array and then start the animation
 const objects = [
@@ -81,27 +84,42 @@ const objects = [
   particlesMesh,
 ];
 
+// Variables and arrays needed for animation
 let currentOption = 'CPU';
 let previousOption = currentOption;
 const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
-
 objects.forEach((o) => scene.add(o));
-start();
+
+// Framerate
+const stats = new Stats();
+stats.showPanel(0);
+document.body.appendChild(stats.dom);
+
+// Initial orbit config
+orbit.target.set(-40.00000000990247, 99.9933845715949, 0.2264628736384653);
+
+// Initial render
+document.body.appendChild(renderer.domElement);
+renderer.render(scene, camera);
+animate();
+makeResponsiveWindow(window, renderer, camera);
 
 // Functions
-function start() {
-  camera.position.set(-40, 100, 25);
-  document.body.appendChild(renderer.domElement);
-  renderer.render(scene, camera);
-  animate();
-  makeResponsiveWindow(window, renderer, camera);
-}
 
 function animate() {
+  stats.begin();
+
   requestAnimationFrame(animate);
   updateModel(currentOption);
+
+  if (orbit !== undefined) {
+    orbit.update();
+  }
+
   animateParticle(particlesMesh);
   renderer.render(scene, camera);
+
+  stats.end();
 }
 
 function updateModel(newName) {
@@ -109,18 +127,59 @@ function updateModel(newName) {
   if (currentOption !== previousOption) {
     const modelToShow = gltfModels.filter((m) => m.name.toUpperCase() === newName.toUpperCase())[0];
 
-    gsap.to(camera.position, {
-      x: modelToShow.getX(),
-      y: modelToShow.getY() + modelToShow.getViewHeight(),
-      z: modelToShow.getZ() + modelToShow.getViewDistance(),
-      duration: 1.5,
-      ease: true,
+    // gsap.to(camera.position, {
+    //   x: modelToShow.getX(),
+    //   y: modelToShow.getY() + modelToShow.getViewHeight(),
+    //   z: modelToShow.getZ() + modelToShow.getViewDistance(),
+    //   duration: 1.5,
+    //   ease: true,
+    // });
+
+    const camrot = { x: camera.rotation.x, y: camera.rotation.y, z: camera.rotation.z };
+    camera.rotation.set(camrot.x, camrot.y, camrot.z);
+
+    const startOrientation = camera.quaternion.clone();
+    const targetOrientation = camera.quaternion.clone().normalize();
+
+    const { center, size } = modelToShow.getMeshPos();
+
+    // Hilangin orbit sebelum gerak. Biar animasi normal
+    if (orbit !== undefined) {
+      orbit.enabled = false;
+    }
+    orbit = undefined;
+
+    // Animasi gerak, berurutan
+    gsap.to({}, {
+      duration: 0,
+      onUpdate() {
+        camera.quaternion.copy(startOrientation).slerp(targetOrientation, this.progress());
+      },
+      onComplete: () => {
+        gsap.to(camera.position, {
+          duration: 1.5,
+          x: center.x,
+          y: center.y,
+          z: center.z + 4 * size.z,
+          onComplete: () => {
+            // Kembaliin orbit lagi
+            camera.lookAt(center.x, center.y, center.z);
+            orbit = createOrbit(camera, renderer.domElement);
+            orbit.enabled = true;
+            orbit.target.set(center.x, center.y, center.z);
+          },
+        });
+      },
     });
+
+    previousOption = currentOption;
   }
 }
 
 // Script andu, buat ubah2 teks di halaman details
 $('.list-group-item').on('click', function () {
+  if ($(this).html() === 'Daftar Komponen') return;
+
   $('.list-group-item').removeClass('active');
   $(this).addClass('active');
 
@@ -155,4 +214,24 @@ $('.list-group-item').on('click', function () {
   });
 });
 
-// canvas onclick zoom
+// Zoom in & out
+document.addEventListener('keydown', (evt) => {
+  switch (evt.keyCode) {
+    case 187:
+      gsap.to(camera.position, {
+        duration: 0.2,
+        z: camera.position.z - 2,
+      });
+      break;
+
+    case 189:
+      gsap.to(camera.position, {
+        duration: 0.2,
+        z: camera.position.z + 2,
+      });
+      break;
+
+    default:
+      break;
+  }
+});
