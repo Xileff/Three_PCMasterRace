@@ -27,25 +27,26 @@
     {
       "nama": "M.2 Nvme SSD",
       "deskripsi": "M.2, pronounced m dot two and formerly known as the Next Generation Form Factor (NGFF), is a specification for internally mounted computer expansion cards and associated connectors.",
-      "nama_produk":"ASROCK B450M Pro4",
-      "deskripsi_produk":"Support Socket: AM4\n Support Ram: DDR4 3200+\n Slot PCIE: 1\n Support AMD Quad CrossFireX: Yes\n Graphic Output: HDMI, DVI-D, D-Sub\n Support 7.1: Yes\n SATA3 Slot: 4\n Ultra M.2 Slot: 1\n M.2 SATA Slot: 1\n Slot USB: 8\n LAN: Realtek Gigabit LAN"
+      "nama_produk":"V-Gen SSD Turbo M.2",
+      "deskripsi_produk":"Type: M.2 SATA SSD 2280\n Dimension: 80 x 22 x 2mm\n Kapasitas: 256GB\n Sequential Read Peformance: 550 MBps\n Sequential Read Peformance: 520 MBps\n Volume: +/- 8gr"
     },
     {
       "nama": "SATA SSD",
-      "deskripsi": "A solid-state drive (SSD) is a solid-state storage device that uses integrated circuit assemblies to store data persistently, typically using flash memory, and functioning as secondary storage in the hierarchy of computer storage.","nama_produk":"ASROCK B450M Pro4",
-      "deskripsi_produk":"Support Socket: AM4\n Support Ram: DDR4 3200+\n Slot PCIE: 1\n Support AMD Quad CrossFireX: Yes\n Graphic Output: HDMI, DVI-D, D-Sub\n Support 7.1: Yes\n SATA3 Slot: 4\n Ultra M.2 Slot: 1\n M.2 SATA Slot: 1\n Slot USB: 8\n LAN: Realtek Gigabit LAN"
+      "deskripsi": "A solid-state drive (SSD) is a solid-state storage device that uses integrated circuit assemblies to store data persistently, typically using flash memory, and functioning as secondary storage in the hierarchy of computer storage.",
+      "nama_produk":"SanDisk SSD Plus 480 GB",
+      "deskripsi_produk":"Capacity: 480GB\n Interface: SATA III\n Dimensi (L x W x H: 7mm x 100.55mm x 69.95mm\n Sequential Read Peformance: 535MB/s\n Sequential Write Peformance: 445Mb/s"
     },
     {
       "nama": "HDD",
       "deskripsi": "A hard disk drive (HDD), hard disk, hard drive, or fixed disk is an electro-mechanical data storage device that stores and retrieves digital data using magnetic storage with one or more rigid rapidly rotating platters coated with magnetic material.",
-      "nama_produk":"ASROCK B450M Pro4",
-      "deskripsi_produk":"Support Socket: AM4\n Support Ram: DDR4 3200+\n Slot PCIE: 1\n Support AMD Quad CrossFireX: Yes\n Graphic Output: HDMI, DVI-D, D-Sub\n Support 7.1: Yes\n SATA3 Slot: 4\n Ultra M.2 Slot: 1\n M.2 SATA Slot: 1\n Slot USB: 8\n LAN: Realtek Gigabit LAN"
+      "nama_produk":"Western Digital Blue 1 TB",
+      "deskripsi_produk":"Capacity: 1TB\n Interface: SATA\n Form Factor: 3.5 inch\n Cache Size: 32MB\n Disk Speed(RPM): 7200 RPM\n Recording Technology: CMR\n Dimension: 5.79 x 4 x 1.03"
     },
     {
       "nama": "PSU",
       "deskripsi": "A power supply unit (PSU) converts mains AC to low-voltage regulated DC power for the internal components of a computer. Modern personal computers universally use switched-mode power supplies.",
-      "nama_produk":"ASROCK B450M Pro4",
-      "deskripsi_produk":"Support Socket: AM4\n Support Ram: DDR4 3200+\n Slot PCIE: 1\n Support AMD Quad CrossFireX: Yes\n Graphic Output: HDMI, DVI-D, D-Sub\n Support 7.1: Yes\n SATA3 Slot: 4\n Ultra M.2 Slot: 1\n M.2 SATA Slot: 1\n Slot USB: 8\n LAN: Realtek Gigabit LAN"
+      "nama_produk":"Cougar XTC 600W",
+      "deskripsi_produk":"Power: 600W\n AC Input: DDR4 200-240V~50Hz/ 6.3 A\n Dimension: 140 x 150 x 86mm\n Fan Size: 120 mm\n Cables: Black, Flat Cables\n Connector: 1x Main Power (24/20 pins) 550 mm, 1 CPU(8/4 pins), 2x PCIE(8/6 pins), 6x SATA, 2x Pata Peripheral "
     }
   ]
 }
