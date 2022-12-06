@@ -37,7 +37,7 @@ const camera = createPerspectiveCamera(100, window.innerWidth / window.innerHeig
 camera.position.set(-40, 100, 25);
 camera.lookAt(-40, 100, 0);
 let orbit = createOrbit(camera, renderer.domElement);
-let animationFinished = true;
+orbit.enableDamping = true;
 
 // Main part
 const cpu = new CPU(scene, { x: -40, y: 100, z: 0 }, 'CPU', { x: 1.6, y: 4.7, z: 0 });
@@ -87,8 +87,8 @@ const objects = [
 ];
 objects.forEach((o) => scene.add(o));
 
-let currentModel = cpu;
-let currentOption = currentModel.name;
+let currentModel = cpu; // undefined
+let currentOption = 'CPU';
 let previousOption = currentOption;
 
 const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
@@ -106,6 +106,7 @@ document.body.appendChild(stats.dom);
 
 // Initial orbit config
 orbit.target.set(-40.00000000990247, 99.9933845715949, 0.2264628736384653);
+orbit.saveState();
 
 // Begin
 document.body.appendChild(renderer.domElement);
@@ -142,59 +143,40 @@ function updateModel(newName) {
   if (currentOption !== previousOption) {
     const modelToShow = gltfModels.filter((m) => m.name.toUpperCase() === newName.toUpperCase())[0];
     currentModel = modelToShow;
-
     const camrot = { x: camera.rotation.x, y: camera.rotation.y, z: camera.rotation.z };
     camera.rotation.set(camrot.x, camrot.y, camrot.z);
-
     const startOrientation = camera.quaternion.clone();
     const targetOrientation = camera.quaternion.clone().normalize();
-
     const { center, size } = modelToShow.getMeshPos();
 
-    // Remove orbit and falsify animationFinished to normalize animation
-    orbit.enabled = false;
-    orbit = undefined;
-    animationFinished = false;
-
-    // Animation
+    // Animation 3
+    // 1. Reset orbit rotation
+    // 2. Move the camera
     tl.from({}, {
       duration: 0,
       onUpdate() {
         camera.quaternion.copy(startOrientation).slerp(targetOrientation, this.progress());
       },
-    }).to(camera.position, {
+    });
+
+    orbit.reset();
+    orbit.enabled = false;
+    orbit = undefined;
+
+    tl.to(camera.position, {
       duration: 1.5,
       x: center.x,
       y: center.y,
-      z: center.z + 4 * size.z,
-      onUpdate: () => {
-        animationFinished = (camera.position.x.toFixed(6) === center.x.toFixed(6))
-                                  && (camera.position.y.toFixed(6) === center.y.toFixed(6))
-                                  && (camera.position.z.toFixed(6) === (center.z + 4 * size.z).toFixed(6));
-      },
+      z: center.z + 4 * size.z + modelToShow.getViewDistance(),
       onComplete: () => {
-        if (!animationFinished) return;
-
         camera.lookAt(center.x, center.y, center.z);
         orbit = createOrbit(camera, renderer.domElement);
         orbit.enableDamping = true;
-
-        console.log(`New orbit target x : ${center.x.toFixed(6)}`);
-
-        if (prevOrbitTarget.x.toFixed(6) === center.x.toFixed(6)) return;
-
-        gsap.fromTo(orbit.target, {
-          x: prevOrbitTarget.x,
-          y: prevOrbitTarget.y,
-          z: prevOrbitTarget.z,
-        }, {
-          duration: 0.5,
-          x: center.x,
-          y: center.y,
-          z: center.z,
-        });
+        orbit.target.set(center.x, center.y, center.z);
+        orbit.saveState();
       },
     });
+
     previousOption = currentOption;
   }
 }
@@ -207,10 +189,6 @@ function updateOrbitAngle() {
     y: orbit.object.position.y,
     z: orbit.object.position.z,
   };
-
-  // Bisa dipake
-  // console.log(cpu.getMeshPos().center.x);
-  console.log(`Prev orbit target x : ${prevOrbitTarget.x.toFixed(6)}`);
 }
 
 // Script andu, buat ubah2 teks di halaman details

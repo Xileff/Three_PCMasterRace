@@ -1,0 +1,75 @@
+These animations belong to method updateModel() in showcase.js
+
+// Animation 1
+    // orbit.enabled = false;
+    // orbit = undefined;
+    // animationFinished = false;
+
+    // tl.from({}, {
+    //   duration: 0,
+    //   onUpdate() {
+    //     camera.quaternion.copy(startOrientation).slerp(targetOrientation, this.progress());
+    //   },
+    // }).to(camera.position, {
+    //   duration: 1.5,
+    //   x: center.x,
+    //   y: center.y,
+    //   z: center.z + 4 * size.z,
+    //   onUpdate: () => {
+    //     animationFinished = (camera.position.x.toFixed(6) === center.x.toFixed(6))
+    //                               && (camera.position.y.toFixed(6) === center.y.toFixed(6))
+    //                               && (camera.position.z.toFixed(6) === (center.z + 4 * size.z).toFixed(6));
+    //     // console.log(animationFinished);
+    //   },
+    //   onComplete: () => {
+    //     if (!animationFinished) return;
+
+    //     camera.lookAt(center.x, center.y, center.z);
+    //     orbit = createOrbit(camera, renderer.domElement);
+    //     orbit.enableDamping = true;
+
+    //     if (prevOrbitTarget.x.toFixed(6) === center.x.toFixed(6)) return;
+
+    //     console.log(`Prev orbit angle : ${prevOrbitAngle}`);
+    //     console.log(`New orbit angle : ${orbit.getPolarAngle()}`);
+
+    //     gsap.fromTo(orbit.target, {
+    //       duration: 0.5,
+    //       x: prevOrbitTarget.x,
+    //       y: prevOrbitTarget.y,
+    //       z: prevOrbitTarget.z,
+    //     }, {
+    //       duration: 0.5,
+    //       x: center.x,
+    //       y: center.y,
+    //       z: center.z,
+    //     });
+    //   },
+    // });
+
+    // Animation 2
+    // 1. Rotate orbit to target
+    // 2. Then move the camera
+
+    // tl.from({}, {
+    //   duration: 0,
+    //   onUpdate() {
+    //     camera.quaternion.copy(startOrientation).slerp(targetOrientation, this.progress());
+    //   },
+    // }).to(orbit.target, {
+    //   duration: 1,
+    //   x: center.x,
+    //   y: center.y,
+    //   z: center.z,
+    // });
+
+    // tl.to(camera.position, {
+    //   duration: 1.5,
+    //   x: center.x,
+    //   y: center.y,
+    //   z: center.z + 4 * size.z,
+    //   onComplete: () => {
+    //     camera.lookAt(center.x, center.y, center.z);
+    //     orbit.target.set(center.x, center.y, center.z);
+    //   },
+    // });

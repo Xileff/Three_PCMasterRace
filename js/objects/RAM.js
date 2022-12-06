@@ -7,7 +7,7 @@ class RAM extends GLTF {
 
   speed = 0.25;
 
-  viewDistance = 4;
+  viewDistance = 1;
 
   viewHeight = 3;
 

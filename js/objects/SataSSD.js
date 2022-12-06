@@ -1,7 +1,8 @@
 import GLTF from './GLTF';
 
 class SataSSD extends GLTF {
-  viewDistance = -2.5;
+  // viewDistance = -2.5;
+  viewDistance = -4;
 
   viewHeight = 0.75;
 

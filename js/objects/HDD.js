@@ -5,7 +5,7 @@ class NvmeSSD extends GLTF {
 
   speed = 0.25;
 
-  viewDistance = -5; // -5
+  viewDistance = -16; // -5
 
   viewHeight = 0;
 

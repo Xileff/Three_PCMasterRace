@@ -7,7 +7,7 @@ class PSU extends GLTF {
 
   speed = 0.25;
 
-  viewDistance = 3;
+  viewDistance = -13;
 
   viewHeight = 1;
 
