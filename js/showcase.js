@@ -74,15 +74,15 @@ const objects = [
   directionalLight1,
   directionalLight2,
   directionalLight3,
-  hemisphereLight,
-  hemisphereLightx1,
-  hemisphereLightx2,
-  hemisphereLighty1,
-  hemisphereLighty2,
-  pointLight,
-  spotlight,
-  spotlight1,
-  spotlight2,
+  // hemisphereLight,
+  // hemisphereLightx1,
+  // hemisphereLightx2,
+  // hemisphereLighty1,
+  // hemisphereLighty2,
+  // pointLight,
+  // spotlight,
+  // spotlight1,
+  // spotlight2,
   particlesMesh,
 ];
 objects.forEach((o) => scene.add(o));
@@ -93,6 +93,11 @@ let previousOption = currentOption;
 
 const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
 const tl = gsap.timeline();
+let prevOrbitTarget = {
+  x: orbit.object.position.x,
+  y: orbit.object.position.y,
+  z: orbit.object.position.z,
+};
 
 // Framerate
 const stats = new Stats();
@@ -102,14 +107,19 @@ document.body.appendChild(stats.dom);
 // Initial orbit config
 orbit.target.set(-40.00000000990247, 99.9933845715949, 0.2264628736384653);
 
-// Initial render
+// Begin
 document.body.appendChild(renderer.domElement);
 renderer.render(scene, camera);
 animate();
 makeResponsiveWindow(window, renderer, camera);
 
-// Functions
+const audio = new Audio('/sounds/You Should.mp3');
+audio.loop = true;
+audio.load();
+audio.volume = 0.3;
+audio.play();
 
+// Functions
 function animate() {
   stats.begin();
 
@@ -119,6 +129,7 @@ function animate() {
   if (orbit !== undefined) {
     orbit.update();
   }
+  updateOrbitAngle();
 
   animateParticle(particlesMesh);
   renderer.render(scene, camera);
@@ -166,11 +177,40 @@ function updateModel(newName) {
 
         camera.lookAt(center.x, center.y, center.z);
         orbit = createOrbit(camera, renderer.domElement);
-        orbit.target.set(center.x, center.y, center.z);
+        orbit.enableDamping = true;
+
+        console.log(`New orbit target x : ${center.x.toFixed(6)}`);
+
+        if (prevOrbitTarget.x.toFixed(6) === center.x.toFixed(6)) return;
+
+        gsap.fromTo(orbit.target, {
+          x: prevOrbitTarget.x,
+          y: prevOrbitTarget.y,
+          z: prevOrbitTarget.z,
+        }, {
+          duration: 0.5,
+          x: center.x,
+          y: center.y,
+          z: center.z,
+        });
       },
     });
     previousOption = currentOption;
   }
+}
+
+function updateOrbitAngle() {
+  if (orbit === undefined) return;
+
+  prevOrbitTarget = {
+    x: orbit.object.position.x,
+    y: orbit.object.position.y,
+    z: orbit.object.position.z,
+  };
+
+  // Bisa dipake
+  // console.log(cpu.getMeshPos().center.x);
+  console.log(`Prev orbit target x : ${prevOrbitTarget.x.toFixed(6)}`);
 }
 
 // Script andu, buat ubah2 teks di halaman details
