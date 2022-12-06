@@ -104,7 +104,6 @@ class GLTF {
     const aabb = new Box3().setFromObject(this.mesh.scene);
     const center = aabb.getCenter(new Vector3());
     const size = aabb.getSize(new Vector3());
-
     return { center, size };
   }
 

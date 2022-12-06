@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable func-names */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
@@ -32,10 +33,11 @@ import PSU from './objects/PSU';
 // Preparation
 const renderer = createRenderer(window.innerWidth, window.innerHeight, 0x000000);
 const scene = createScene();
-const camera = createPerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = createPerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(-40, 100, 25);
 camera.lookAt(-40, 100, 0);
 let orbit = createOrbit(camera, renderer.domElement);
+let animationFinished = true;
 
 // Main part
 const cpu = new CPU(scene, { x: -40, y: 100, z: 0 }, 'CPU', { x: 1.6, y: 4.7, z: 0 });
@@ -66,7 +68,7 @@ const spotlight2 = createSpotlight(0x0000ff, 1, { x: 4, y: 6, z: -4 }, 0.1, 1);
 
 const particlesMesh = createParticles(50000, 0.3);
 
-// Put all objects in array and then start the animation
+// Variables and arrays needed for animation
 const objects = [
   directionalLight,
   directionalLight1,
@@ -83,12 +85,14 @@ const objects = [
   spotlight2,
   particlesMesh,
 ];
-
-// Variables and arrays needed for animation
-let currentOption = 'CPU';
-let previousOption = currentOption;
-const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
 objects.forEach((o) => scene.add(o));
+
+let currentModel = cpu;
+let currentOption = currentModel.name;
+let previousOption = currentOption;
+
+const gltfModels = [cpu, gpu, motherboard, ram, nvmessd, satassd, psu, hdd];
+const tl = gsap.timeline();
 
 // Framerate
 const stats = new Stats();
@@ -126,14 +130,7 @@ function updateModel(newName) {
   if (newName == undefined) return;
   if (currentOption !== previousOption) {
     const modelToShow = gltfModels.filter((m) => m.name.toUpperCase() === newName.toUpperCase())[0];
-
-    // gsap.to(camera.position, {
-    //   x: modelToShow.getX(),
-    //   y: modelToShow.getY() + modelToShow.getViewHeight(),
-    //   z: modelToShow.getZ() + modelToShow.getViewDistance(),
-    //   duration: 1.5,
-    //   ease: true,
-    // });
+    currentModel = modelToShow;
 
     const camrot = { x: camera.rotation.x, y: camera.rotation.y, z: camera.rotation.z };
     camera.rotation.set(camrot.x, camrot.y, camrot.z);
@@ -143,35 +140,35 @@ function updateModel(newName) {
 
     const { center, size } = modelToShow.getMeshPos();
 
-    // Hilangin orbit sebelum gerak. Biar animasi normal
-    if (orbit !== undefined) {
-      orbit.enabled = false;
-    }
+    // Remove orbit and falsify animationFinished to normalize animation
+    orbit.enabled = false;
     orbit = undefined;
+    animationFinished = false;
 
-    // Animasi gerak, berurutan
-    gsap.to({}, {
+    // Animation
+    tl.from({}, {
       duration: 0,
       onUpdate() {
         camera.quaternion.copy(startOrientation).slerp(targetOrientation, this.progress());
       },
+    }).to(camera.position, {
+      duration: 1.5,
+      x: center.x,
+      y: center.y,
+      z: center.z + 4 * size.z,
+      onUpdate: () => {
+        animationFinished = (camera.position.x.toFixed(6) === center.x.toFixed(6))
+                                  && (camera.position.y.toFixed(6) === center.y.toFixed(6))
+                                  && (camera.position.z.toFixed(6) === (center.z + 4 * size.z).toFixed(6));
+      },
       onComplete: () => {
-        gsap.to(camera.position, {
-          duration: 1.5,
-          x: center.x,
-          y: center.y,
-          z: center.z + 4 * size.z,
-          onComplete: () => {
-            // Kembaliin orbit lagi
-            camera.lookAt(center.x, center.y, center.z);
-            orbit = createOrbit(camera, renderer.domElement);
-            orbit.enabled = true;
-            orbit.target.set(center.x, center.y, center.z);
-          },
-        });
+        if (!animationFinished) return;
+
+        camera.lookAt(center.x, center.y, center.z);
+        orbit = createOrbit(camera, renderer.domElement);
+        orbit.target.set(center.x, center.y, center.z);
       },
     });
-
     previousOption = currentOption;
   }
 }
@@ -200,9 +197,6 @@ $('.list-group-item').on('click', function () {
         previousOption = currentOption;
         currentOption = data.nama.toUpperCase();
 
-        // console.log('Prev : ' + previousOption);
-        // console.log('Current : ' + currentOption);
-
         deskripsi += `<p>${data.deskripsi}</p>`;
         namaProduk = `In Display : ${data.nama_produk}`;
         deksripsiProduk = `${data.deskripsi_produk.replaceAll('\n', '<br>')}`;
@@ -216,19 +210,26 @@ $('.list-group-item').on('click', function () {
 
 // Zoom in & out
 document.addEventListener('keydown', (evt) => {
+  let step;
   switch (evt.keyCode) {
+    // Plus
     case 187:
+      step = camera.position.z > currentModel.getMeshPos().center.z ? -2 : 2;
       gsap.to(camera.position, {
         duration: 0.2,
-        z: camera.position.z - 2,
+        z: camera.position.z + step,
       });
+
       break;
 
+    // Minus
     case 189:
+      step = camera.position.z > currentModel.getMeshPos().center.z ? 2 : -2;
       gsap.to(camera.position, {
         duration: 0.2,
-        z: camera.position.z + 2,
+        z: camera.position.z + step,
       });
+
       break;
 
     default:
