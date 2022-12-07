@@ -1,5 +1,11 @@
 These animations belong to method updateModel() in showcase.js
 
+let prevOrbitTarget = {
+  x: orbit.object.position.x,
+  y: orbit.object.position.y,
+  z: orbit.object.position.z,
+};
+
 // Animation 1
     // orbit.enabled = false;
     // orbit = undefined;
@@ -73,3 +79,14 @@ These animations belong to method updateModel() in showcase.js
     //     orbit.target.set(center.x, center.y, center.z);
     //   },
     // });
+
+// This method must be called in animate()
+function updateOrbitAngle() {
+  if (orbit === undefined) return;
+
+  prevOrbitTarget = {
+    x: orbit.object.position.x,
+    y: orbit.object.position.y,
+    z: orbit.object.position.z,
+  };
+}

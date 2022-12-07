@@ -7,7 +7,7 @@ class CPU extends GLTF {
 
   zInitial = -100;
 
-  viewDistance = 30;
+  viewDistance = 25;
 
   viewHeight = 0;
 
