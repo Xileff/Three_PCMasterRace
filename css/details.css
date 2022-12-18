@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+#deskripsi{
+    font-family: 'Montserrat', sans-serif;
+}
+#nama{
+    font-family: 'Open Sans', sans-serif;
+}
+#nama-produk{
+    font-family: 'Open Sans', sans-serif;
+}
+#deskripsi-produk{
+    font-family: 'Montserrat', sans-serif;
+}
+#headingName{
+    font-family: 'Open Sans', sans-serif;
+}
+.list-group-item{
+    font-family: 'Orbitron', sans-serif;
+}
