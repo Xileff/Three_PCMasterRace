@@ -10,7 +10,7 @@
       "nama": "GPU",
       "deskripsi": "What does GPU stand for? Graphics processing unit, a specializedprocessor originally designed to accelerate graphics rendering. GPUs can process many pieces of data simultaneously, making them useful for machine learning, video editing, and gaming applications.",
       "nama_produk": "Nvidia GeForce RTX 3060TI 8GB GDDR6",
-      "deskripsi_produk": "Graphics Processing Unit: NVIDIA® GeForce RTX™ 3060 Ti\nInterface: PCI Express® Gen 4\nCores: 4864 Units\nCore Clocks: Boost: 1695 MHz\nMemory Speed: 14 Gbps\nMemory: 8GB GDDR6\nMemory Bus: 256-bit\nOutput: DisplayPort x 3 (v1.4a)"
+      "deskripsi_produk": "Graphics Processing Unit NVIDIA® GeForce RTX™ 3090\nInterface PCI Express® Gen 4\nCores 10496 Units\nCore Clocks Boost: 1725 MHz\nMemory Speed 19.5 Gbps\nMemory \n24GB GDDR6X\nMemory Bus 384-bit\nOutput DisplayPort x 3 (v1.4a) / HDMI 2.1 x 1\nHDCP Support Y\nPower consumption 350W\nPower connectors 8-pin x 2\nRecommended PSU 750W\nCard Dimension (mm) 305 x 120 x 57 mm\nWeight (Card / Package) 1387g / 2004g\nDirectX Version Support 12 API\nOpenGL Version Support 4.6\nNVLink Support Y\nMaximum Displays 4\nVR Ready Y\nG-SYNC® technology Y\nAdaptive Vertical Sync Y\nDigital Maximum Resolution 7680x4320"
     },
     {
       "nama": "Motherboard",

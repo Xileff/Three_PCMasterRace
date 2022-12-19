@@ -10,7 +10,7 @@ import gsap from 'gsap';
 import Stats from 'stats.js';
 
 // Utils
-import { HemisphereLight, HemisphereLightHelper, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PointLight, PointLightHelper, Raycaster, SphereGeometry, Vector3 } from 'three';
+import { PointLight, Raycaster, Vector3 } from 'three';
 import { createOrbit } from './utils/orbitControl';
 import { animateParticle, createParticles } from './utils/particles';
 import { createPerspectiveCamera } from './utils/perspectiveCamera';
@@ -76,6 +76,9 @@ const directionalLight1 = createDirectionalLight(0xffffff, { x: -10, y: 0, z: 0 
 const directionalLight2 = createDirectionalLight(0xffffff, { x: 0, y: 0, z: 10 });
 const directionalLight3 = createDirectionalLight(0xffffff, { x: 0, y: 0, z: -10 });
 
+const cpuLight = new PointLight(0xffffff, 10, 100);
+cpuLight.position.set(-40.00000000990247, 99.9933845715949, 0.2264628736384653);
+
 const staticLights = [
   spotlight,
   spotlight1,
@@ -83,8 +86,8 @@ const staticLights = [
   ambientLight,
   hemisphereLight,
   pointLight,
-  directionalLight,
   directionalLight2,
+  cpuLight,
 ];
 
 // Dynamic lighting
@@ -180,8 +183,8 @@ function animate() {
 
 
   // testing
-  // if (!psu.meshIsLoading()) {
-  //   console.log(psu.getMeshPos().center);
+  // if (!cpu.meshIsLoading()) {
+  //   console.log(cpu.getMeshPos().center);
   // }
 
   animateParticle(particlesMesh);

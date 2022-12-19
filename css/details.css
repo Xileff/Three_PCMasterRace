@@ -19,3 +19,7 @@
 .list-group-item{
     font-family: 'Orbitron', sans-serif;
 }
+
+.list-group-item:hover {
+    cursor: pointer;
+}
