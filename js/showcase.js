@@ -52,7 +52,6 @@ const satassd = new SataSSD(scene, { x: -40, y: -100, z: 0 }, 'SATA SSD', { x: 0
 const hdd = new HDD(scene, { x: -50, y: -50, z: -3 }, 'HDD', { x: -0.2, y: 1.05, z: 0 });
 const psu = new PSU(scene, { x: -50, y: 50, z: 0 }, 'PSU', { x: 0, y: 0.6, z: 0 });
 
-
 // Lightings
 const speed1 = 0.01;
 const speed2 = 0.02;
@@ -180,7 +179,6 @@ function animate() {
   light1.rotateY(speed1);
   light2.rotateY(speed2);
   light3.rotateY(speed3);
-
 
   // testing
   // if (!cpu.meshIsLoading()) {
