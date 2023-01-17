@@ -368,5 +368,3 @@ document.addEventListener('keydown', (evt) => {
 });
 
 window.addEventListener('pointermove', rayCasterOnPointerMove);
-
-// cahaya mengecil dan membesar
